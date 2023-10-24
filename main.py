@@ -10,6 +10,8 @@ def save():
     new_password = password_entry.get()
     f = open("data.txt", "a")
     f.write(f"\n{new_website}| {new_username} | {new_password}")
+    website_entry.delete(0, 'end') #Clears field
+    password_entry.delete(0, 'end')
     f.close()
 
 
