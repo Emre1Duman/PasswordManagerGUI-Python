@@ -19,25 +19,26 @@ def generate_password():
 
     password = "".join(password_list)
 
-    password_entry.insert(END, string=f"{password}")
+    password_entry.insert(END, string=f"{password}") #Populates the password text box with the new generated password
     pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 def save():
 
+    #Getting the text entered by user and assigning to variables
     new_website = website_entry.get()
     new_username = username_entry.get()
     new_password = password_entry.get()
 
-    if len(new_website) == 0 or len(new_password) == 0:
+    if len(new_website) == 0 or len(new_password) == 0: #Checks to if the fields are left empty
         messagebox.showinfo(title="Oops", message="Please dont leave any fields empty!")
     else:
         is_ok = messagebox.askokcancel(title=new_website, message=f"These are the details entered: \nEmail: {new_username}" 
                             f"\nPassword: {new_password} \nIs it ok to save?")
         if is_ok:
             with open("data.txt", "a") as data_file:
-                data_file.write(f"{new_website}| {new_username} | {new_password}\n")
+                data_file.write(f"{new_website}| {new_username} | {new_password}\n") #Saving the passwords to data.txt
             website_entry.delete(0, 'end') #Clears field
             password_entry.delete(0, 'end')
 
@@ -62,7 +63,6 @@ username_label.grid(column=0, row=2)
 password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
 
-
 #Entries
 website_entry = Entry(width=35)
 website_entry.focus()
@@ -72,7 +72,6 @@ username_entry.insert(END, string="uzumaki@gmail.com")
 username_entry.grid(column=1, row=2, columnspan=2)
 password_entry = Entry(width=35)
 password_entry.grid(column=1, row=3, columnspan=2)
-
 
 #Buttons
 password_button = Button(text="Generate Password", command=generate_password)
